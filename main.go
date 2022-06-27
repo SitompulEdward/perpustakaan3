@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"os"
 	"perpustakaan3/Transaksi/connection"
 	"perpustakaan3/Transaksi/controllers"
 	"perpustakaan3/Transaksi/repositories"
@@ -40,7 +41,7 @@ func main() {
 	r.Put("/update-data-pengembalian/{id}", ctrl.PutDataPengembalian)
 	r.Delete("/delete-data-pengembalian/{id}", ctrl.DeleteDataPengembalian)
 
-	if err := http.ListenAndServe(":5000", r); err != nil {
+	if err := http.ListenAndServe(":"+os.Getenv("HOST")+"", r); err != nil {
 		fmt.Println("Error Starting Service !")
 	}
 }
